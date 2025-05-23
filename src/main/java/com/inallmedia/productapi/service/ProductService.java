@@ -42,6 +42,11 @@ public class ProductService implements ProductsApiDelegate {
   }
 
   @Override
+  public List<ReadProduct> getSortedProductsByPrice() {
+    return productRepository.findAll().stream().map(productMapper::mapToReadProduct).sorted((p1, p2) -> p2.getPrice().compareTo(p1.getPrice())).toList();
+  }
+
+  @Override
   public ReadProduct updateProduct(String id, CreateProduct createProduct) {
     var product = productRepository.findByIdOrFail(id);
     product.setItem(createProduct.getItem() != null ? createProduct.getItem() : product.getItem());

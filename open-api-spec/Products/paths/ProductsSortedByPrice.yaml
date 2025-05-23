@@ -1,0 +1,16 @@
+get:
+  tags:
+    - Products
+  summary: Get all products sorted by price
+  operationId: getSortedProductsByPrice
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml#/components/responses/ErrorResponse'

@@ -21,3 +21,6 @@ paths:
 
   /products/{bottomPrice}/{topPrice}:
     $ref: './Products/paths/ProductsInRange.yaml'
+
+  /products/sort/price:
+    $ref: './Products/paths/ProductsSortedByPrice.yaml'
