@@ -1,0 +1,20 @@
+parameters:
+  - $ref: '../../Parameters/requiredBottomLimitPriceInPath.yaml'
+  - $ref: '../../Parameters/requiredTopLimitPriceInPath.yaml'
+
+get:
+  tags:
+    - Products
+  summary: Get all products in a given price range
+  operationId: getAllProductsInRange
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml#/components/responses/ErrorResponse'

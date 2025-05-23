@@ -1,0 +1,5 @@
+name: bottomPrice
+in: path
+required: true
+schema:
+  type: integer

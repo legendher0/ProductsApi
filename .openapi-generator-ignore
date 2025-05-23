@@ -1,0 +1,4 @@
+*
+**/*
+!**/src/main/java/com/**/*
+**/OpenApiGeneratorApplication.java

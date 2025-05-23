@@ -1,0 +1,23 @@
+openapi: 3.0.1
+info:
+  title: Products Management
+  description: This services provides endpoint to manage product and orders
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: http://springdoc.org
+  version: '1.0'
+servers:
+  - url: http://localhost:8080/api
+    description: Local development server
+
+paths:
+
+  /products:
+    $ref: './Products/paths/Products.yaml'
+
+  /products/{id}:
+    $ref: './Products/paths/Product.yaml'
+
+  /products/{bottomPrice}/{topPrice}:
+    $ref: './Products/paths/ProductsInRange.yaml'

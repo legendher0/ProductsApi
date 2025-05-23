@@ -1,0 +1,26 @@
+type: object
+description: Error Details for response
+properties:
+  code:
+    description: Application error code.
+    type: integer
+    nullable: false
+    example: 400
+  detail:
+    description: A short, summary of the problem type.
+    type: string
+    nullable: false
+    example: 'size must be between 10 and 12.'
+  field:
+    description: The field that caused the error.
+    type: string
+    example: 'consumer.phone'
+  value:
+    description: The value of the field that caused the error.
+    type: object
+    example: null
+  location:
+    description: The location of the field that caused the error.
+    type: string
+    enum: [ 'BODY','PATH','QUERY','HEADER' ]
+    example: 'BODY'

@@ -1,0 +1,48 @@
+parameters:
+  - $ref: '../../Parameters/requiredIdInPath.yaml'
+
+get:
+  tags:
+    - Products
+  summary: Get a specific product with a given id
+  operationId: getProduct
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml'
+
+put:
+  tags:
+    - Products
+  summary: Update an existing product
+  operationId: updateProduct
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/CreateProduct.yaml'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml'
+
+delete:
+  tags:
+    - Products
+  summary: Delete a product
+  operationId: deleteProduct
+  responses:
+    204:
+      description: OK
+    default:
+      $ref: '../../responses/ErrorResponse.yaml'

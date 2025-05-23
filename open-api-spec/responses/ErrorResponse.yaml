@@ -1,0 +1,8 @@
+components:
+  responses:
+    ErrorResponse:
+      description: Generic Error
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ErrorDetails.yaml'

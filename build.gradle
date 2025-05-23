@@ -1,0 +1,94 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id "org.openapi.generator" version "7.12.0"
+    id 'idea'
+}
+
+
+group = 'com.inallmedia'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file('/generated/')
+        generatedSourceDirs += [
+                layout.buildDirectory.dir("/generated/")
+        ]
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'org.mapstruct:mapstruct:1.6.2'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+}
+
+openApiValidate {
+    inputSpec = "$rootDir/open-api-spec/open-api-docs.yaml".toString()
+    recommend = true
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+openApiGenerate {
+    generatorName = "spring"
+    ignoreFileOverride = ".openapi-generator-ignore"
+    inputSpec = "$rootDir/open-api-spec/open-api-docs.yaml"
+    outputDir = "$buildDir/generated/sources/openAPIGenerator"
+    apiPackage = "com.inallmedia.productapi.generated.api"
+    modelPackage = "com.inallmedia.productapi.generated.model"
+    configOptions = [
+            "additionalModelTypeAnnotations": "@lombok.Data @lombok.AllArgsConstructor @lombok.Builder",
+            "delegatePattern": "true",
+            "useSpringBoot3": "true",
+            "useSpringController": "true",
+            "useResponseEntity": "false"
+    ]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "$buildDir/generated/sources/openApiGenerator/src/main/java"
+            srcDirs += "$buildDir/generated/sources/annotationProcessor/src/main/java"
+        }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,22 @@
+type: object
+description: Consulting a product
+properties:
+  barcode:
+    type: string
+  item:
+    type: string
+  category:
+    type: string
+  price:
+    type: integer
+  discount:
+    type: integer
+  available:
+    type: integer
+required:
+  - barcode
+  - item
+  - category
+  - price
+  - discount
+  - available

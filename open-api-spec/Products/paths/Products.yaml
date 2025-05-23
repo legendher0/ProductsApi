@@ -1,0 +1,36 @@
+get:
+  tags:
+    - Products
+  summary: Get all products
+  operationId: getAllProducts
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml#/components/responses/ErrorResponse'
+
+post:
+  tags:
+    - Products
+  summary: Create a new product
+  operationId: createProduct
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/CreateProduct.yaml'
+  responses:
+    201:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/ReadProduct.yaml'
+    default:
+      $ref: '../../responses/ErrorResponse.yaml'
